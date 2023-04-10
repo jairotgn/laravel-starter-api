@@ -1,6 +1,8 @@
 # laravel-starter-api
 
-This is a REST API built with laravel.
+This is a REST API for authentication. 
+
+Built with laravel.
 
 ## Available routes
 
@@ -10,3 +12,11 @@ This is a REST API built with laravel.
 <li>localhost/api/public/register </li>
 <li>localhost/api/private/users  </li>
 </ul>
+
+## Installation
+
+npm install
+
+## Usage
+
+php artisan serve
