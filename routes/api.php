@@ -15,9 +15,10 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 
-Route::post('/login', [UserController::class, 'login']);
+Route::post('/public/login', [UserController::class, 'login']);
+Route::post('/public/register', [UserController::class, 'register']);
+
+Route::middleware('auth:sanctum')->post('/public/loginCheck', [UserController::class, 'loginCheck']);
+Route::middleware('auth:sanctum')->post('/private/users', [UserController::class, 'index']);

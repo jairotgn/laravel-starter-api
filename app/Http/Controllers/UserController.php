@@ -9,6 +9,42 @@ use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
+
+
+    public function register(Request $request) {
+        // get the recrest post, validate it and store it in the database
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        // check if email exist
+        $userExist = User::where('email', $request->email)->first();
+        if ($userExist) {
+            throw ValidationException::withMessages([
+                'The provided email is already in use.',
+            ]);
+        }
+
+        $user           = new User();
+        $user->name     = $request->name;
+        $user->email    = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        if ($user) {
+            return[
+                'status' => 1
+            ];
+        }
+    }
+
+    public function index(Request $request) {
+        $users = User::all();
+        return $users;
+    }
+
     public function login(Request $request)
     {
         $request->validate([
@@ -20,16 +56,26 @@ class UserController extends Controller
 
         if (! $user || ! Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect.'],
+                'status' => ['The provided credentials are incorrect.'],
             ]);
         }
 
         $token =  $user->createToken($user->id)->plainTextToken;
 
-        return response()->json([
+        return[
             'user' => $user->name,
             'email' => $user->email,
             'token' => $token
-        ],200);
+        ];
+    }
+
+    public function loginCheck (Request $request) {
+        $user = $request->user();
+        if ($user) {
+            return ['status'=>1, 'message' => 'You are logged in as' ];
+        } else {
+            return ['status'=>0, 'message' => 'You are not logged in'];
+        }
+
     }
 }
