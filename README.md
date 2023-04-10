@@ -4,7 +4,9 @@ This is a REST API built with laravel.
 
 ## Available routes
 
-localhost/api/public/login 
-localhost/api/public/loginCheck 
-localhost/api/public/register 
-localhost/api/private/users 
+<ul>
+<li>localhost/api/public/login </li>
+<li>localhost/api/public/loginCheck </li>
+<li>localhost/api/public/register </li>
+<li>localhost/api/private/users  </li>
+</ul>
