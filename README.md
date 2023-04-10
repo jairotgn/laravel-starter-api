@@ -1,7 +1,6 @@
 # laravel-starter-api
 
-This is a REST API for authentication. 
-
+This is a REST API for authentication. <br />
 Built with laravel.
 
 ## Available routes
@@ -13,9 +12,17 @@ Built with laravel.
 <li>localhost/api/private/users  </li>
 </ul>
 
-## Installation
+## Demo credentials
 
-npm install
+Email: admin@gmail.com   <br />
+Password: password
+
+## Installation
+<ol>
+<li>npm install </li>
+<li>php artisan migrate</li>
+<li>php artisan db:seed --class=UserSeeder</li>
+</ol>
 
 ## Usage
 
