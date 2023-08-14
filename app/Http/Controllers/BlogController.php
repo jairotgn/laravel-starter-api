@@ -12,7 +12,21 @@ class BlogController extends Controller
         return $posts;
     }
 
-    public function show(number $postId) {
-        // return view('posts.show', compact('post'));
+    public function show(int $blogId) {
+        $blog = Blog::find($blogId);
+        return $blog;
+    }
+
+    public function save(Request $request, $id = null)
+    {
+        if ($id) {
+            // Actualizar un blog existente
+            $blog = Blog::findOrFail($id);
+            $blog->update($request->all());
+        } else {
+            // Crear un nuevo blog
+            $blog = Blog::create($request->all());
+        }
+        return ['status'=>1];
     }
 }
