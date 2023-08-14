@@ -28,4 +28,4 @@ Route::get('/blog', [BlogController::class, 'index']);
 Route::get('/blog/{id}', [BlogController::class, 'show']);
 
 
-Route::post('/blog/{id?}', [BlogController::class, 'save']);
+Route::middleware('auth:sanctum')->post('/blog/{id}', [BlogController::class, 'save']);
